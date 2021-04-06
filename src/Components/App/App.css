@@ -1,0 +1,73 @@
+.App-body {
+  text-align: center;
+  height: 100vh;
+  font-family: Segoe UI,SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  width: 30vw;
+  height: 80vh;
+  border: 1px solid lightgrey;
+  margin: 50px auto;
+  border-radius: 5px;
+}
+
+@keyframes opposition {
+  0%{transform: rotate(0deg);}
+  10%{transform: rotate(-90deg);}
+  20%{transform: rotate(0deg);}
+  30%{transform: rotate(0deg);}
+  40%{transform: rotate(-90deg);}
+  50%{transform: rotate(0deg);}
+  60%{transform: rotate(0deg);}
+  70%{transform: rotate(-90deg);}
+  80%{transform: rotate(0deg);}
+}
+
+
+@keyframes player {
+  0%{transform: rotate(0deg);}
+  10%{transform: rotate(90deg);}
+  20%{transform: rotate(0deg);}
+  30%{transform: rotate(0deg);}
+  40%{transform: rotate(90deg);}
+  50%{transform: rotate(0deg);}
+  60%{transform: rotate(0deg);}
+  70%{transform: rotate(90deg);}
+  80%{transform: rotate(0deg);}
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+#player {
+  height: 100px;
+  margin-top: 20px;
+}
+
+.inline-display {
+  display: inline;
+}
+
+.fists-container{
+  margin: 20px;
+}
+
+#opposition {
+  height: 100px;
+  margin-top: 20px;
+}
+
+.reset{
+  background-color: lightseagreen;
+}
+
+.button{
+  border: 0.5px solid #fff;
+  border-radius: 5px;
+  padding: 5px 20px;
+  font-size: 15px;
+}
+
+.reset:hover{
+  cursor: pointer
+}
