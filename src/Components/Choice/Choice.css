@@ -1,8 +1,6 @@
 .choice{
     background-color: lightpink;
+    background-image: linear-gradient(140deg, #FFD55A 0%, #6DD47E 100%);
     margin: 5px;
-}
-
-.choice:hover{
-    cursor: pointer;
+    box-shadow: 1px 1px 3px #ccc;
 }

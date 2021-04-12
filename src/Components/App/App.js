@@ -18,16 +18,12 @@ const App = () => {
 
   const startAnimation = () => {
     let player = document.getElementById('player');
-    player.style.animationName = 'player';
-    player.style.animationDuration = '2s';
+    player.classList.add('player-animation')
     let opposition = document.getElementById('opposition');
-    opposition.style.animationName = 'opposition';
-    opposition.style.animationDuration = '2s';
+    opposition.classList.add('opposition-animation')
     setTimeout(() => {
-    player.style.animationName = '';
-    player.style.animationDuration = '';
-    opposition.style.animationName = '';
-    opposition.style.animationDuration = '';
+      player.classList.remove('player-animation');
+      opposition.classList.remove('opposition-animation');
     setDisabled(false);
     }, 1600)
   }
