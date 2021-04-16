@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Choice from '../Choice/Choice';
-import left from './left.png';
-import right from './right.png';
-
 
 const App = () => {
   const choices = ['Rock', 'Paper', 'Scissors'];
   const [opposition, setOpposition] = useState('');
   const [player, setPlayer] = useState('');
   const [results, setResults] = useState('');
-  const [topWins, setTopWins] = useState(0);
   const [currentWins, setCurrentWins] = useState(0);
+  const [oppositionWins, setOppositionWins] = useState(0);
+  const [challenge, setChallenge] = useState(1);
   const [color, setColor] = useState('');
   const [tries, setTries] = useState(0);
   const [disabled, setDisabled] = useState(false);
@@ -38,12 +36,6 @@ const App = () => {
     startAnimation();
   }
 
-  const setHighScore = () => {
-    if(currentWins >= topWins){
-      setTopWins(currentWins + 1)
-    }
-  }
-
   const result = () => {
     if(player && opposition){
       if((player === 'Rock' && opposition === 'Scissors') || (player === 'Paper' && opposition === 'Rock') || 
@@ -51,7 +43,6 @@ const App = () => {
         setResults('Winner!!');
         setColor('#28a745')
         setCurrentWins(currentWins + 1);
-        setHighScore();
       }
       else if(player === opposition){
         setResults('Draw!!')
@@ -60,6 +51,7 @@ const App = () => {
       else{
         setResults('Loser!!');
         setColor('#dc3545')
+        setOppositionWins(oppositionWins + 1);
       }
     }
   }
@@ -69,26 +61,43 @@ const App = () => {
     setPlayer('');
     setOpposition('');
     setCurrentWins(0);
+    setOppositionWins(0);
+    setChallenge(1);
     setTries(0)
   }
 
   useEffect(result, [tries]);
 
+  useEffect(() => {
+    if(currentWins === (challenge*10)){
+      alert('You Won!');
+      setChallenge(challenge + 1)
+    }
+    else if(oppositionWins === (challenge*10)){
+      alert('You Lose!');
+      newGame();
+    }
+  }, [currentWins, oppositionWins])
+
   return (
     <div className="App-body">
         <h1>Rock, Paper, Scissors!</h1>
-        <button className="reset button" onClick={newGame}>Reset</button>
-        <br />
-        <div>Longest Streak: {topWins}</div>
-        <div>Current Streak: {currentWins} </div>
-        <div>Computer: {opposition}</div>
-        <div>You: {player}</div>
+        <div><button className="reset button" onClick={newGame}>Reset</button></div>
         {choices.map(choice => <Choice key={choices.indexOf(choice)} name={choice} onClick={handleClick} disabled={disabled}/>)}
-        <div>
-          <div className="inline-display fists-container"><img src={left} id='player' 
-          alt='a cartoon left fist'></img></div>
-          <div className="inline-display fists-container"><img src={right} id='opposition' 
-          alt='a cartoon right fist'></img></div>
+        <div>Goal: {challenge*10}</div>
+        <div id="game-container">
+          <div className="fists-container">
+            <i class='far fa-hand-rock' id='player' style={{fontSize:'86px'}}></i>
+            <div>You</div>
+            <div>{player}</div>
+            <div>{currentWins}</div>
+          </div>
+          <div className="fists-container">
+            <i class='far fa-hand-rock' id='opposition' style={{fontSize:'86px'}}></i>
+            <div>Computer</div>
+            <div>{opposition}</div>
+            <div>{oppositionWins}</div>
+          </div>
         </div>
         <div><h1 style={{color: color}}>{results}</h1></div>
         <div><h1>Tries: {tries}</h1></div>
