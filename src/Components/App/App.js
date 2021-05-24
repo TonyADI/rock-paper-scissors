@@ -40,16 +40,16 @@ const App = () => {
     if(player && opposition){
       if((player === 'Rock' && opposition === 'Scissors') || (player === 'Paper' && opposition === 'Rock') || 
       (player === 'Scissors' && opposition === 'Paper')){
-        setResults('Winner!!');
+        setResults('Winner!');
         setColor('#28a745')
         setCurrentWins(currentWins + 1);
       }
       else if(player === opposition){
-        setResults('Draw!!')
+        setResults('Draw')
         setColor('#ffc107')
       }
       else{
-        setResults('Loser!!');
+        setResults('Loser!');
         setColor('#dc3545')
         setOppositionWins(oppositionWins + 1);
       }
@@ -70,11 +70,15 @@ const App = () => {
 
   useEffect(() => {
     if(currentWins === (challenge*10)){
-      alert('You Won!');
-      setChallenge(challenge + 1)
+      const ans = window.confirm('You Won! Keep texting your luck?');
+      if(ans){
+        setChallenge(challenge + 1);
+      }else{
+        newGame();
+      }
     }
     else if(oppositionWins === (challenge*10)){
-      alert('You Lose!');
+      alert('You Lose! Better luck next time.');
       newGame();
     }
   }, [currentWins, oppositionWins])
@@ -84,17 +88,17 @@ const App = () => {
         <h1>Rock, Paper, Scissors!</h1>
         <div><button className="reset button" onClick={newGame}>Reset</button></div>
         {choices.map(choice => <Choice key={choices.indexOf(choice)} name={choice} onClick={handleClick} disabled={disabled}/>)}
-        <div>Goal: {challenge*10}</div>
+        <div><h3>Goal: {challenge*10}</h3></div>
         <div id="game-container">
           <div className="fists-container">
             <i class='far fa-hand-rock' id='player' style={{fontSize:'86px'}}></i>
-            <div>You</div>
+            <div><h4>You</h4></div>
             <div>{player}</div>
             <div>{currentWins}</div>
           </div>
           <div className="fists-container">
             <i class='far fa-hand-rock' id='opposition' style={{fontSize:'86px'}}></i>
-            <div>Computer</div>
+            <div><h4>Computer</h4></div>
             <div>{opposition}</div>
             <div>{oppositionWins}</div>
           </div>

@@ -16,6 +16,10 @@ div h1{
   transition: color 0.5s;
 }
 
+div#game-container h4{
+  margin: auto !important;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
