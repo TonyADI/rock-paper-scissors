@@ -38,6 +38,10 @@ div#game-container h4{
   margin: 20px auto;
 }
 
+.fists-container i {
+  font-size: 86px; 
+}
+
 #opposition {
   height: 100px;
   transform: rotateY(180deg);
