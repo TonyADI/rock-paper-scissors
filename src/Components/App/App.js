@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 import Choice from '../Choice/Choice';
+import { Player } from '../Player';
+import './App.css';
 
 const App = () => {
-  const choices = ['Rock', 'Paper', 'Scissors'];
   const [opposition, setOpposition] = useState('');
   const [player, setPlayer] = useState('');
   const [results, setResults] = useState('');
@@ -14,6 +14,8 @@ const App = () => {
   const [tries, setTries] = useState(0);
   const [disabled, setDisabled] = useState(false);
 
+  const choices = ['Rock', 'Paper', 'Scissors'];
+  
   const startAnimation = () => {
     let player = document.getElementById('player');
     player.classList.add('player-animation')
@@ -86,25 +88,48 @@ const App = () => {
   return (
     <div className="App-body">
         <h1>Rock, Paper, Scissors!</h1>
-        <div><button className="reset button" onClick={newGame}>Reset</button></div>
-        {choices.map(choice => <Choice key={choices.indexOf(choice)} name={choice} onClick={handleClick} disabled={disabled}/>)}
-        <div><h3>Goal: {challenge*10}</h3></div>
-        <div id="game-container">
-          <div className="fists-container">
-            <i class='far fa-hand-rock' id='player' style={{fontSize:'86px'}}></i>
-            <div><h4>You</h4></div>
-            <div>{player}</div>
-            <div>{currentWins}</div>
-          </div>
-          <div className="fists-container">
-            <i class='far fa-hand-rock' id='opposition' style={{fontSize:'86px'}}></i>
-            <div><h4>Computer</h4></div>
-            <div>{opposition}</div>
-            <div>{oppositionWins}</div>
-          </div>
+        <div>
+            <button 
+                className="button reset" 
+                onClick={newGame}
+            >
+                Reset
+            </button>
         </div>
-        <div><h1 style={{color: color}}>{results}</h1></div>
-        <div><h1>Tries: {tries}</h1></div>
+        {choices.map(choice => 
+            <Choice 
+                key={choice} 
+                name={choice} 
+                onClick={handleClick} 
+                disabled={disabled}/>
+        )}
+        <div>
+            <h3>
+                Goal: {challenge*10}
+            </h3>
+        </div>
+        <div id="game-container">
+          <Player 
+            name='You'
+            id='player'
+            choice={player}
+            wins={currentWins}/>
+          <Player 
+            name='Computer'
+            id='opposition'
+            choice={opposition}
+            wins={oppositionWins}/>
+        </div>
+        <div>
+            <h1 style={{color: color}}>
+                {results}
+            </h1>
+        </div>
+        <div>
+            <h1>
+                Tries: {tries}
+            </h1>
+        </div>
     </div>
   );
 }
